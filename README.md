@@ -9,7 +9,10 @@ Library that we use to automatically add BEM(Block Element Modifier) prefixes to
 ## Usage
 	
 	//first require the package
-	var concat = require('bem-js');
+	var bem = require('bem-js');
 	
-	//just use it as a function
-	concat('hello', null, 'world');
+	//choose a class where you want to add a modifier
+	var cl = BEM.block("bbbxc-button");
+	
+	//modified class
+	var mod = cl.mod("color-warning");
