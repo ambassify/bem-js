@@ -18,4 +18,11 @@ describe('BEM::Constructor', function( done ){
         assert.equal(el.toString(), 'bbbxc-button__view');
     });
 
+    it( 'BEM should add bbbxc-menuitem to a classname', function() {
+		var cl = BEM.block("bbbxc-menu");
+		cl.afters = ['bbbxc-menuitem'];
+        var af = cl.after();
+        assert.equal(af.toString(), 'bbbxc-menu bbbxc-menuitem');
+    });
+
 });
