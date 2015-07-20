@@ -18,11 +18,18 @@ describe('BEM::Constructor', function( done ){
         assert.equal(el.toString(), 'bbbxc-button__view');
     });
 
-    it( 'BEM should add bbbxc-menuitem to a classname', function() {
+    it( 'BEM should add bbbxc-menuitem after a classname', function() {
 		var cl = BEM.block("bbbxc-menu");
 		cl.afters = ['bbbxc-menuitem'];
         var af = cl.after();
         assert.equal(af.toString(), 'bbbxc-menu bbbxc-menuitem');
+    });
+
+    it( 'BEM should add bbbxc-menuitem before a classname', function() {
+		var cl = BEM.block("bbbxc-menuitem__button");
+		cl.befores = ['bbbxc-menuitem'];
+        var af = cl.after();
+        assert.equal(af.toString(), 'bbbxc-menuitem bbbxc-menuitem__button');
     });
 
 });
