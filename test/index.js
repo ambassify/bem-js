@@ -12,4 +12,10 @@ describe('BEM::Constructor', function( done ){
         assert.equal(mod.toString(), 'bbbxc-button bbbxc-button--color-warning');
     });
 
+    it( 'BEM should add element to a classname', function() {
+		var cl = BEM.block("bbbxc-button");
+        var el = cl.el("view");
+        assert.equal(el.toString(), 'bbbxc-button__view');
+    });
+
 });
