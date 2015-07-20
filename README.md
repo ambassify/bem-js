@@ -1,6 +1,6 @@
 # BEM-JS [![Circle CI](https://circleci.com/gh/bubobox/concat-js/tree/master.svg?style=svg&circle-token=512452848019d7bf350ad30579e6930414a2fd5f)](https://circleci.com/gh/bubobox/concat-js/tree/master)
 
-Library that we use to automatically add BEM(Block Element Modifier) prefixes to class names.
+Helper library to generate BEM class names.
 
 ## Why
 
