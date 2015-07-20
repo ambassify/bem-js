@@ -1,0 +1,33 @@
+{
+  "name": "bem-js",
+  "version": "0.1.0",
+  "description": "Library that we use as BEM(Block Element Modifier) class manager.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jshint src && ./node_modules/.bin/mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bubobox/bem-js.git"
+  },
+  "keywords": [
+    "bem-js",
+    "reactjs",
+    "block",
+    "element",
+    "modifier"
+  ],
+  "author": "Wim Mostmans (http://www.sitebase.be/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bubobox/bem-js/issues"
+  },
+  "homepage": "https://github.com/bubobox/bem-js",
+  "devDependencies": {
+    "jshint": "^2.5.8",
+     "mocha": "latest"
+  }
+}
