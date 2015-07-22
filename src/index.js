@@ -15,85 +15,111 @@
         this.afters = afters || [];
         this.name = blockName;
     }
+
+    Block.factory = function (blockName, modifiers, befores, afters) {
+        return new Block(blockName, modifiers, befores, afters);
+    };
+
+    Block.clone = function (block) {
+        if (!(block instanceof Block)) {
+            return;
+        }
+
+        return new Block(
+            block.name,
+            block.modifiers.slice(),
+            block.befores.slice(),
+            block.afters.slice()
+        );
+    };
+
+    Block.prototype.el = function (el) {
+        return new Block(this.name + "__" + el);
+    };
+
     Block.prototype.mod = function () {
-        var mod = this.modifiers.slice();
-        var befores = this.befores.slice();
-        var afters= this.afters.slice();
+        var block = Block.clone(this);
 
-        for (var _i = 0; _i < arguments.length; _i++) {
-            mod.push(arguments[_i]);
+        for (var i = 0; i < arguments.length; i++) {
+            block.modifiers.push(arguments[i]);
         }
-        return new Block(this.name, mod, befores, afters);
+
+        return block;
     };
+
     Block.prototype.cmod = function (condition) {
-        var mod = this.modifiers.slice();
-        var befores = this.befores.slice();
-        var afters= this.afters.slice();
+        if (!condition || arguments.length < 2) {
+            return this;
+        }
 
-        for (var _i = 1; _i < arguments.length; _i++) {
-            mod[_i - 1] = arguments[_i];
-        }
-        if (condition) {
-            mod.push(arguments[_i]);
-        }
-        return new Block(this.name, mod, befores, afters);
+        // All the arguments minus the condition
+        var modifiers = Array.prototype.slice.call(arguments, 1);
+
+        return this.mod.apply(this, modifiers);
     };
+
+    Block.prototype.before = function () {
+        var block = Block.clone(this);
+
+        for (var i = 0; i < arguments.length; i++) {
+            var b = arguments[i];
+
+            if (b instanceof Block) {
+                b = b.toString();
+            }
+
+            if (typeof b === 'string') {
+                block.befores.push(b);
+            }
+        }
+
+        return block;
+    };
+
+    Block.prototype.after = function () {
+        var block = Block.clone(this);
+
+        for (var i = 0; i < arguments.length; i++) {
+            var b = arguments[i];
+
+            if (b instanceof Block) {
+                b = b.toString();
+            }
+
+            if (typeof b === 'string') {
+                block.afters.push(b);
+            }
+        }
+
+        return block;
+    };
+
     Block.prototype.toString = function () {
-        var blockName = this.name;
-        var result = "";
+        var blockName = this.name,
+            result = "";
+
         if (this.befores.length) {
             result += this.befores.join(" ") + " ";
         }
+
         result += blockName;
+
         if (this.modifiers.length) {
             result += " ";
             result += this.modifiers.map(function (mod) { return blockName + "--" + mod; }).join(" ");
         }
+
         if (this.afters.length) {
             result += " ";
             result += this.afters.join(" ");
         }
+
         return result;
     };
-    Block.prototype.el = function (el) {
-        return new Block(this.name + "__" + el);
-    };
-    Block.prototype.after = function () {
-        var other = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            other[_i - 0] = arguments[_i];
-        }
-        for (var i = 0; i < other.length; i++) {
-            var o = other[i];
-            if (o) {
-                this.afters.push(o.toString());
-            }
-        }
-        return this;
-    };
-    Block.prototype.before = function () {
-        var mod = this.modifiers.slice();
-        var befores = this.befores.slice();
-        var afters= this.afters.slice();
-        var other = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            other[_i - 0] = arguments[_i];
-        }
-        for (var i = 0; i < other.length; i++) {
-            var o = other[i];
-            if (o) {
-                befores.push(o.toString());
-            }
-        }
-        return new Block(this.name, mod, befores, afters);
-    };
 
-    function block(name) {
-        return new Block(name);
-    }
 
     return {
         Block: Block,
-        block: block
+        block: Block.factory
     };
 });
