@@ -35,6 +35,8 @@ describe('BEM::Constructor', function( done ){
     it( 'Should be immutable', function () {
     var block = BEM.block('block'),
 
+        element = block.el('el'),
+
         modifier1 = block.mod('modifier1'),
         modifier2 = block.cmod(true, 'modifier2'),
 
@@ -58,6 +60,7 @@ describe('BEM::Constructor', function( done ){
         assert(block3.afters.length === 1, 'block3 should have one before');
 
         // block should still be the same as when created
+        assert(block.name === 'block', 'block has not changed');
         assert(block.modifiers.length === 0, 'block should have no modifiers');
         assert(block.before.length === 0, 'block should have no befores');
         assert(block.after.length === 0, 'block should have no afters');
