@@ -1,31 +1,37 @@
  /*jslint node: true */
 "use strict";
+var Immutable = require('immutable');
 
 (function (classes) {
 
-    function Block(blockName) {
-        this.modifiers = [];
-        this.befores = [];
-        this.afters = [];
+    function Block(blockName, modifiers, befores, afters) {
+        this.modifiers = modifiers || [];
+        this.befores = befores || [];
+        this.afters = afters || [];
         this.name = blockName;
     }
     Block.prototype.mod = function () {
-        var mod = [];
+        var mod = this.modifiers.slice();
+        var befores = this.befores.slice();
+        var afters= this.afters.slice();
+
         for (var _i = 0; _i < arguments.length; _i++) {
-            mod[_i - 0] = arguments[_i];
+            mod.push(arguments[_i]);
         }
-        this.modifiers.push.apply(this.modifiers, mod);
-        return this;
+        return new Block(this.name, mod, befores, afters);
     };
     Block.prototype.cmod = function (condition) {
-        var mod = [];
+        var mod = this.modifiers.slice();
+        var befores = this.befores.slice();
+        var afters= this.afters.slice();
+
         for (var _i = 1; _i < arguments.length; _i++) {
             mod[_i - 1] = arguments[_i];
         }
         if (condition) {
-            this.mod.apply(this, mod);
+            mod.push(arguments[_i]);
         }
-        return this;
+        return new Block(this.name, mod, befores, afters);
     };
     Block.prototype.toString = function () {
         var blockName = this.name;
@@ -61,6 +67,9 @@
         return this;
     };
     Block.prototype.before = function () {
+        var mod = this.modifiers.slice();
+        var befores = this.befores.slice();
+        var afters= this.afters.slice();
         var other = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             other[_i - 0] = arguments[_i];
@@ -68,10 +77,10 @@
         for (var i = 0; i < other.length; i++) {
             var o = other[i];
             if (o) {
-                this.befores.push(o.toString());
+                befores.push(o.toString());
             }
         }
-        return this;
+        return new Block(this.name, mod, befores, afters);
     };
 
     function block(name) {
