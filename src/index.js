@@ -1,8 +1,13 @@
 /*jslint node: true */
-/*global window: false */
+/* global define */
 "use strict";
 
-(function (classes) {
+;(function (name, context, definition) {
+  if (typeof module !== 'undefined' && module.exports) { module.exports = definition(); }
+  else if (typeof define === 'function' && define.amd) { define(definition); }
+  else if (typeof exports === 'object' ) { exports = definition(); }
+  else { context[name] = definition(); }
+})('BEM', this, function () { // jshint ignore:line
 
     function Block(blockName, modifiers, befores, afters) {
         this.modifiers = modifiers || [];
@@ -87,6 +92,8 @@
         return new Block(name);
     }
 
-    classes.Block = Block;
-    classes.block = block;
-})(module.exports || (window.classes = {}));
+    return {
+        Block: Block,
+        block: block
+    };
+});
