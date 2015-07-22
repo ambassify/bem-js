@@ -1,6 +1,5 @@
  /*jslint node: true */
 "use strict";
-var Immutable = require('immutable');
 
 (function (classes) {
 

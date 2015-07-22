@@ -26,9 +26,6 @@
     "url": "https://github.com/bubobox/bem-js/issues"
   },
   "homepage": "https://github.com/bubobox/bem-js",
-  "dependencies": {
-    "immutable": "latest"
-  },
   "devDependencies": {
     "jshint": "^2.5.8",
      "mocha": "latest"

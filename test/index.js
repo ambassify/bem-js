@@ -3,7 +3,6 @@
 "use strict";
 var assert = require('assert'),
     BEM = require( "../src/index.js" ),
-    Immutable = require('immutable');
 
 describe('BEM::Constructor', function( done ){
 
