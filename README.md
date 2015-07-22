@@ -33,19 +33,19 @@ The library exposes two properties. `Block` which is the actual class and `block
 - `Block.prototype.el (el)`  
   Get a new block that is a BEM element of this block.
 
-- `Block.prototype.mod ()`  
+- `Block.prototype.mod (modifier[, modifier, ...])`  
   Get a new block that is a BEM modifier of this block. You can pass in as many arguments as you like, every argument will be seen as a modifier.
 
 
-- `Block.prototype.cmod (condition)`  
+- `Block.prototype.cmod (condition, modifier[, modifier, ...])`  
   Get a new block that is a BEM modifier of this block if condition evaluates to `true`. You can pass in as many arguments as you like, every argument will be seen as a modifier.
 
 
-- `Block.prototype.before ()`  
+- `Block.prototype.before (block[, block, ...])`  
   Get a new block that is the current block prefixed with another BEM block.You can pass in as many arguments as you like, every argument will be seen as a prefix block. Arguments can be instances of Block or strings.
 
 
-- `Block.prototype.after ()`  
+- `Block.prototype.after (block[, block, ...])`  
   Get a new block that is the current block postfixed with another BEM block.You can pass in as many arguments as you like, every argument will be seen as a prefix block. Arguments can be instances of Block or strings.
 
 
