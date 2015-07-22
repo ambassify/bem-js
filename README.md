@@ -14,5 +14,5 @@ Helper library to generate BEM class names.
 	//choose a class where you want to add a modifier
 	var cl = BEM.block("bbbxc-button");
 	
-	//modified class
+	//add the modifier to the class
 	var mod = cl.mod("color-warning");

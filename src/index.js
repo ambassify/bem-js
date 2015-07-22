@@ -1,4 +1,5 @@
- /*jslint node: true */
+/*jslint node: true */
+/*global window: false */
 "use strict";
 
 (function (classes) {
