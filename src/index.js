@@ -36,7 +36,7 @@
     Block.prototype.el = function (el) {
         var block = Block.clone(this);
 
-        block.name += "__" + el);
+        block.name += "__" + el;
 
         return block;
     };
