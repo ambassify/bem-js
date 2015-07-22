@@ -6,28 +6,28 @@ var assert = require('assert'),
 
 describe('BEM::Constructor', function( done ){
 
-	it( 'BEM should add color-warning modifier to a classname', function() {
-		var cl = BEM.block("bbbxc-button");
+    it( 'BEM should add color-warning modifier to a classname', function() {
+        var cl = BEM.block("bbbxc-button");
         var mod = cl.mod("color-warning");
         assert.equal(mod.toString(), 'bbbxc-button bbbxc-button--color-warning');
     });
 
     it( 'BEM should add element to a classname', function() {
-		var cl = BEM.block("bbbxc-button");
+        var cl = BEM.block("bbbxc-button");
         var el = cl.el("view");
         assert.equal(el.toString(), 'bbbxc-button__view');
     });
 
     it( 'BEM should add bbbxc-menuitem after a classname', function() {
-		var cl = BEM.block("bbbxc-menu");
-		cl.afters = ['bbbxc-menuitem'];
+        var cl = BEM.block("bbbxc-menu");
+        cl.afters = ['bbbxc-menuitem'];
         var af = cl.after();
         assert.equal(af.toString(), 'bbbxc-menu bbbxc-menuitem');
     });
 
     it( 'BEM should add bbbxc-menuitem before a classname', function() {
-		var cl = BEM.block("bbbxc-menuitem__button");
-		cl.befores = ['bbbxc-menuitem'];
+        var cl = BEM.block("bbbxc-menuitem__button");
+        cl.befores = ['bbbxc-menuitem'];
         var af = cl.after();
         assert.equal(af.toString(), 'bbbxc-menuitem bbbxc-menuitem__button');
     });
@@ -35,12 +35,14 @@ describe('BEM::Constructor', function( done ){
     it( 'Should be immutable', function () {
     var block = BEM.block('block'),
 
+        element = block.el('el'),
+
         modifier1 = block.mod('modifier1'),
         modifier2 = block.cmod(true, 'modifier2'),
 
         block2 = block.before(BEM.block('block2')),
         block3 = block.after(BEM.block('block3'));
-        
+
         // mod immutability
         assert(modifier1.modifiers.indexOf('modifier1') >= 0, 'modifier1 should be in modifier1');
         assert(modifier1.modifiers.indexOf('modifier2') === -1, 'modifier2 should not be in modifier1');
@@ -58,6 +60,7 @@ describe('BEM::Constructor', function( done ){
         assert(block3.afters.length === 1, 'block3 should have one before');
 
         // block should still be the same as when created
+        assert(block.name === 'block', 'block has not changed');
         assert(block.modifiers.length === 0, 'block should have no modifiers');
         assert(block.before.length === 0, 'block should have no befores');
         assert(block.after.length === 0, 'block should have no afters');
