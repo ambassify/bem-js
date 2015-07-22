@@ -34,7 +34,11 @@
     };
 
     Block.prototype.el = function (el) {
-        return new Block(this.name + "__" + el);
+        var block = Block.clone(this);
+
+        block.name += "__" + el);
+
+        return block;
     };
 
     Block.prototype.mod = function () {
