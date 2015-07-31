@@ -5,7 +5,7 @@
     else if (typeof define === 'function' && define.amd) { define(definition); }
     else if (typeof exports === 'object' ) { exports = definition(); }
     else { context[name] = definition(); }
-})('BEM', this, function () { // jshint ignore:line
+})('BEM', this, function () {
 
     function Block(blockName, modifiers, befores, afters) {
         this.modifiers = modifiers || [];
