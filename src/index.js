@@ -1,12 +1,10 @@
-/*jslint node: true */
-/* global define */
 "use strict";
 
 ;(function (name, context, definition) {
-  if (typeof module !== 'undefined' && module.exports) { module.exports = definition(); }
-  else if (typeof define === 'function' && define.amd) { define(definition); }
-  else if (typeof exports === 'object' ) { exports = definition(); }
-  else { context[name] = definition(); }
+    if (typeof module !== 'undefined' && module.exports) { module.exports = definition(); }
+    else if (typeof define === 'function' && define.amd) { define(definition); }
+    else if (typeof exports === 'object' ) { exports = definition(); }
+    else { context[name] = definition(); }
 })('BEM', this, function () { // jshint ignore:line
 
     function Block(blockName, modifiers, befores, afters) {
