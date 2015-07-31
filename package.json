@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "eslint src && mocha test"
+    "test": "eslint src && ./node_modules/.bin/mocha test/*.js"
   },
   "repository": {
     "type": "git",

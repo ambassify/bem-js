@@ -1,5 +1,3 @@
-/*jshint node: true */
-/* global describe, it */
 "use strict";
 var assert = require('assert'),
     BEM = require( "../src/index.js" );
