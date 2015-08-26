@@ -51,3 +51,6 @@ The library exposes two properties. `Block` which is the actual class and `block
 
 - `Block.prototype.toString ()`  
   Get the string representation of this block
+
+- `Block.prototype.single ()`  
+  Get the string representation of a single class generated using BEM-JS.

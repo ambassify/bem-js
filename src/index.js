@@ -119,6 +119,15 @@
         return result;
     };
 
+    Block.prototype.single = function() {
+        var result = this.name;
+
+        if( this.modifiers.length )
+            result += '--' + this.modifiers.pop();
+
+        return result;
+    }
+
 
     return {
         Block: Block,
