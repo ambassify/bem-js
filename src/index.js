@@ -6,47 +6,53 @@
     else if (typeof exports === 'object' ) { exports = definition(); }
     else { context[name] = definition(); }
 })('BEM', this, function () {
+    var cache = {};
 
     function Block(blockName, modifiers, befores, afters) {
         this.modifiers = modifiers || [];
         this.befores = befores || [];
         this.afters = afters || [];
         this.name = blockName;
+
+        if( cache[this] )
+            return cache[this];
+
+        cache[this] = this;
     }
 
     Block.factory = function (blockName, modifiers, befores, afters) {
         return new Block(blockName, modifiers, befores, afters);
     };
 
-    Block.clone = function (block) {
-        if (!(block instanceof Block)) {
+    Block.clone = function (block, newBlock) {
+        if (!(block instanceof Block) || !newBlock) {
             return;
         }
 
         return new Block(
-            block.name,
-            block.modifiers.slice(),
-            block.befores.slice(),
-            block.afters.slice()
+            newBlock.name || block.name,
+            newBlock.modifiers || block.modifiers,
+            newBlock.befores || block.befores,
+            newBlock.afters || block.afters
         );
     };
 
     Block.prototype.el = function (el) {
-        var block = Block.clone(this);
-
-        block.name += "__" + el;
-
-        return block;
+        return this.clone({
+            name: this.name + '__' + el
+        });
     };
 
     Block.prototype.mod = function () {
-        var block = Block.clone(this);
+        var modifiers = this.modifiers.slice();
 
         for (var i = 0; i < arguments.length; i++) {
-            block.modifiers.push(arguments[i]);
+            modifiers.push(arguments[i]);
         }
 
-        return block;
+        return this.clone({
+            modifiers: modifiers
+        });
     };
 
     Block.prototype.cmod = function (condition) {
@@ -61,7 +67,7 @@
     };
 
     Block.prototype.before = function () {
-        var block = Block.clone(this);
+        var befores = this.befores.slice();
 
         for (var i = 0; i < arguments.length; i++) {
             var b = arguments[i];
@@ -71,15 +77,17 @@
             }
 
             if (typeof b === 'string') {
-                block.befores.push(b);
+                befores.push(b);
             }
         }
 
-        return block;
+        return this.clone({
+            befores: befores
+        });
     };
 
     Block.prototype.after = function () {
-        var block = Block.clone(this);
+        var afters = this.afters.slice();
 
         for (var i = 0; i < arguments.length; i++) {
             var b = arguments[i];
@@ -89,11 +97,13 @@
             }
 
             if (typeof b === 'string') {
-                block.afters.push(b);
+                afters.push(b);
             }
         }
 
-        return block;
+        return this.clone({
+            afters: afters
+        });
     };
 
     Block.prototype.toString = function () {
@@ -126,6 +136,10 @@
             result += '--' + this.modifiers.pop();
 
         return result;
+    }
+
+    Block.prototype.clone = function(newBlock) {
+        return Block.clone(this, newBlock);
     }
 
 
