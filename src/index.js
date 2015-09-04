@@ -6,6 +6,9 @@
     else if (typeof exports === 'object' ) { exports = definition(); }
     else { context[name] = definition(); }
 })('BEM', this, function () {
+    // This ensures that a block producing the same classes is also always
+    // the exact same object. This allows for === comparisons to succeed
+    // which is required for the PureRenderMixin used in our ReactJS projects.
     var cache = {};
 
     function Block(blockName, modifiers, befores, afters) {
