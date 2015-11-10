@@ -31,15 +31,22 @@ describe('BEM::Constructor', function( done ){
     });
 
     it( 'Should be immutable', function () {
-    var block = BEM.block('block'),
+        var block = BEM.block('block'),
 
-        element = block.el('el'),
+            element = block.el('el'),
 
-        modifier1 = block.mod('modifier1'),
-        modifier2 = block.cmod(true, 'modifier2'),
+            modifier1 = block.mod('modifier1'),
+            modifier2 = block.cmod(true, 'modifier2'),
 
-        block2 = block.before(BEM.block('block2')),
-        block3 = block.after(BEM.block('block3'));
+            block2 = block.before(BEM.block('block2')),
+            block3 = block.after(BEM.block('block3'));
+
+        // single function should not have any effect on blocks
+        modifier1.single();
+        modifier2.single();
+        block.single();
+        block2.single();
+        block3.single();
 
         // mod immutability
         assert(modifier1.modifiers.indexOf('modifier1') >= 0, 'modifier1 should be in modifier1');

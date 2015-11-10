@@ -136,7 +136,7 @@
         var result = this.name;
 
         if( this.modifiers.length )
-            result += '--' + this.modifiers.pop();
+            result += '--' + this.modifiers[0];
 
         return result;
     }
