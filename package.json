@@ -1,6 +1,6 @@
 {
-  "name": "bem-js",
-  "version": "0.2.1",
+  "name": "bemjs",
+  "version": "0.3.0",
   "description": "Library that we use as BEM(Block Element Modifier) class manager.",
   "main": "src/index.js",
   "directories": {
