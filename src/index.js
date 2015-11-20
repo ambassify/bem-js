@@ -34,15 +34,18 @@
 
         return new Block(
             newBlock.name || block.name,
-            newBlock.modifiers || block.modifiers,
-            newBlock.befores || block.befores,
-            newBlock.afters || block.afters
+            newBlock.modifiers === false ? undefined : newBlock.modifiers || block.modifiers,
+            newBlock.befores === false ? undefined : newBlock.befores || block.befores,
+            newBlock.afters === false ? undefined : newBlock.afters || block.afters
         );
     };
 
     Block.prototype.el = function (el) {
         return this.clone({
-            name: this.name + '__' + el
+            name: this.name + '__' + el,
+            modifiers: false,
+            befores: false,
+            afters: false
         });
     };
 
