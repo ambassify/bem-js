@@ -71,4 +71,11 @@ describe('BEM::Constructor', function( done ){
         assert(block.after.length === 0, 'block should have no afters');
     });
 
+    it( 'Should omit modifiers when creating an element from en existing block', function() {
+        var block = BEM.block('block').mod('modifier');
+        var child = block.el('child');
+
+        assert(child.toString() === 'block__child', 'child should have no modifiers');
+    });
+
 });
