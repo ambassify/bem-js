@@ -33,5 +33,6 @@
     "mocha": "latest",
     "eslint": "^1.0.0-rc-1",
     "eslint-plugin-react": "^2.7.1"
-  }
+  },
+  "tonicExampleFilename": "examples/tonic.js"
 }
